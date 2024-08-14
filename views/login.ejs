@@ -1,0 +1,46 @@
+<%- include('partials/header')%>
+
+  <div class="wrapperpro">
+    <div class="wrapper">
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="login">
+        <h2 class="sign">Log In</h2>
+        <form action="/login" method="post" class="form">
+
+          <div class="input2">
+            <label for="username">Username or Email</label>
+            <input type="text" name="username" id="username" required>
+            <div class="line"></div>
+          </div>
+
+          <div class="input2">
+            <label class="password" for="password">Password</label>
+            <input type="password" name="password" id="password" required minlength="8">
+            <div class="line"></div>
+          </div>
+
+          <div class="remember-forgot">
+            <label for="" class="remember-me"><input type="checkbox" name="" id="">Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <div class="submit">
+            <button class="arrow-login" type="submit">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </form>
+
+        <div class="log-in">
+          <p>Need an account?</p><a href="/register" class="signup-a">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/app.js"></script>
+
+  <%- include('partials/footer')%>

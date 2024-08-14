@@ -1,0 +1,293 @@
+<%- include('partials/header')%>
+
+  <div class="main-wrapper">
+
+    <div class="container">
+
+      <div class="content-head">
+        <h3 class="content-head-title">Tasks Board</h3>
+        <button class="nav-profile-btn">
+          <% if(!currentUser) { %>
+            <a href="/login" class="mr-4">Login</a>
+            <a href="/register" class="mr-4">Register</a>
+            <%} else {%>
+              <a href="/logout">logout</a>
+              <!-- <div class="profile-btn-img p-4 rounded-full bg-black ml-6">
+                <a href="/profile"><img src="/images/Talha.jpg" alt=""></a>
+              </div> -->
+
+              <a href="/profile">
+                <div class="ml-6 relative w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                  <svg class="absolute w-11 h-11 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clip-rule="evenodd">
+                    </path>
+                  </svg>
+                </div>
+              </a>
+
+              <%}%>
+        </button>
+        <!-- <button class="btn loginB">Login</button>
+        <button class="btn signup">Signup</button> -->
+      </div>
+
+      <div class="content-tab">
+
+        <div class="content-tab-head">
+          <div class="tab-l">
+            <ul class="tab-btns">
+              <li class="tab-btn-item">
+                <button class="tab-btn-link" type="button">Overview</button>
+              </li>
+              <li class="tab-btn-item active">
+                <button class="tab-btn-link" type="button">Tasks</button>
+              </li>
+              <li class="tab-btn-item">
+                <button class="tab-btn-link" type="button">Milestones</button>
+              </li>
+              <li class="tab-btn-item">
+                <button class="tab-btn-link" type="button">Messages</button>
+              </li>
+              <li class="tab-btn-item">
+                <button class="tab-btn-link" type="button">Files</button>
+              </li>
+              <li class="tab-btn-item">
+                <button class="tab-btn-link" type="button">Time</button>
+              </li>
+              <li class="tab-btn-item">
+                <button class="tab-btn-link" type="button">Comments</button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-r">
+            <!-- <button class="tab-r-btn">
+                <img src="../assets/icons/maximize-icon.svg" class="tab-r-btn-icon" alt="">
+                <span class="tab-r-btn-text">Full screens</span>
+              </button> -->
+            <button class="tab-r-btn ms-3">
+              <img class="tab-r-btn-icon" alt="">
+              <span class="tab-r-btn-text">Filters</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="content-tab-body">
+          <div class="child-content-body flex xl:flex xl:gap-x-[24px]">
+            <% tasks.forEach(function(task) { %>
+              <div class="tab-container">
+
+                <div class="tab-body-block">
+
+                  <div class="body-item-head">
+
+                    <script>
+                      var taskId = '<%= task._id %>';
+                    </script>
+                    <!-- update title -->
+                    <form class="formclass" method="post" action="/update-title/<%= task._id %>?_method=PATCH">
+                      <h4 class="body-item-head-title">
+                        <input type="text" data-list-title="#listTitle-<%= task._id %>" data-task-id="<%= task._id %>"
+                          class="titleInput bg-transparent pl-1" value="<%= task.listTitle %>">
+                      </h4>
+                    </form>
+                    <!-- Delete list -->
+                    <div class="listDelete">
+                      <form action="/<%= task._id %>?_method=DELETE" method="post">
+                        <button type="submit" class="xmark"><i class="fa-solid fa-trash"></i></button>
+                      </form>
+                    </div>
+                    <!-- <button class="body-item-head-btn group">
+                      <img class="group-hover:invert">
+                    </button> -->
+                  </div>
+
+                  <!-- tab body container -->
+                  <div id="tab-body-container" class="tab-body-container">
+                    <% task.nestedTask.forEach(function(nestedTask) { %>
+
+                      <div class="tab-body-list">
+                        <!-- tab item -->
+                        <div class="tab-body-item" data-modal-target="#modal-<%= nestedTask._id %>">
+
+                          <div class=" item-top">
+                            <div class="item-top-title">
+                              <div class="checkbox-wrapper">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                              </div>
+                            </div>
+
+                            <!-- edit task details-popup btn -->
+                            <div class="edit-icon">
+                              <button data-modal-target="#modal-<%= nestedTask._id %>"
+                                class="popup-open px-2 py-1 rounded-full hover:bg-gray-300 transition-default">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                              </button>
+                              <!-- <div class="cancel ml-2">
+                              <form action="/<%= task._id %>/nested/<%= nestedTask._id %>?_method=DELETE"
+                                method="post">
+                                <button type="submit" class="xmark"><i class="fa-solid fa-xmark"></i></button>
+                              </form>
+                            </div> -->
+                            </div>
+
+                          </div>
+
+                          <div class="item-body">
+                            <p class="item-body-text break-words">
+                              <%= nestedTask.taskTitle %>
+                            </p>
+                            <div class="badge-group">
+                              <span class="badge-brown">Optimalization</span>
+                              <span class="badge-blue">New Project</span>
+                              <span class="badge-green">Design</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- edit pop-up -->
+                        <div data-id="<%= nestedTask._id %>" class="modal  pl-10 pt-2" id="modal-<%= nestedTask._id %>">
+
+                          <form id="edit_form" class="edit_form" method="post"
+                            action="/<%= task._id %>/nested/<%= nestedTask._id %>?_method=PATCH">
+
+                            <div class="modal-header">
+                              <div class="modal-title">
+                                <div class="input">
+
+                                  <input type="text" name="taskTitle" id="" class="text-2xl break-words pr-96"
+                                    value="<%=nestedTask.taskTitle%>">
+                                  <p class="text-[13px] font-semibold ">in list
+                                    <span class="underline">
+                                      <%=task.listTitle%>
+                                    </span>
+                                  </p>
+                                </div>
+                              </div>
+                              <div data-close-btn class="close-btn">&times;</div>
+                            </div>
+
+                            <div class="modal-body">
+                              <div class="edit-form">
+
+                                <div class="create-task">
+
+                                  <div class="create-container">
+
+                                    <div class="input">
+                                      <label class="desc font-semibold underline" for="description">Description</label>
+                                      <br>
+                                      <textarea name="description" id="" placeholder="Add description..."
+                                        class="edit_desc"><%=nestedTask.description%></textarea>
+                                    </div>
+
+                                    <br>
+                                    <div class="input">
+                                      <label class="stat font-semibold underline" for="Status">Status</label>
+                                      <select name="status" id="">
+                                        <% for(let category of categories) { %>
+                                          <option value="<%=category%>" <%=nestedTask.status===category ? 'selected'
+                                            : '' %>>
+                                            <%=category%>
+                                          </option>
+                                          <% } %>
+                                      </select>
+                                    </div>
+
+                                    <br>
+                                    <div class="date">
+                                      <label class="due font-semibold underline" for="due-date">Due date</label>
+                                      <input type="date" name="duedate" id="" value="<%=nestedTask.duedate%>">
+                                      <div class="line"></div>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+
+                                <div class="save-btn"><button
+                                    class="save bg-green hover:bg-opacity-80 text-white px-4 py-1 rounded-lg">Save</button>
+                                </div>
+                              </div>
+                            </div>
+
+                          </form>
+
+                          <div class="cancel ml-96">
+                            <form action="/<%= task._id %>/nested/<%= nestedTask._id %>?_method=DELETE" method="post">
+                              <button type="submit"
+                                class="xmark bg-red-700 hover:bg-opacity-80 text-white px-4 py-1 rounded-lg">Delete
+                                Card</button>
+                            </form>
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <% }); %>
+
+                  </div>
+
+                  <div class="" id="overlay"></div>
+
+                  <!-- new task card -->
+                  <div class="addcard rounded-lg ml-1">
+                    <button
+                      class="addcardbtn rounded-lg hover-bg-gray-200 transition-all duration-300 ease-in-out w-full text-left pl-2 py-1">
+                      <i class="fa-solid fa-plus mr-2"></i>
+                      Add a card
+                    </button>
+                    <div class="addCardDetails proactive">
+                      <form class="formclass" method="post" action="/new-card?_method=PATCH">
+                        <input type="hidden" name="id" value="<%= task._id %>">
+                        <textarea name="cardDetails"
+                          class="cardDetails rounded-lg bg-white shadow-tab-item p-4 border-solid border-[1px] border-black/5 mb-2"
+                          placeholder="Enter a title..."></textarea>
+                        <button class="addCard rounded-[4px] bg-[#579DFF] px-3 py-1 mr-2">Add card</button>
+                        <button class="cancelCard" type="button"><i
+                            class="fa-solid fa-xmark fa-lg cursor-pointer"></i></button>
+                      </form>
+                    </div>
+                    <!-- <div class="" id="overlay2"></div> -->
+                  </div>
+
+                </div>
+
+              </div>
+              <% }); %>
+
+          </div>
+
+          <!-- new list -->
+          <div class="newTaskList">
+            <div class="addlist rounded-lg ml-1">
+              <button id="addlistbtn"
+                class="addlistbtn w-[256px] rounded-lg bg-flash-white hover:bg-gray-200 transition-all duration-300 ease-in-out text-left px-2 mr-10 py-2 ">
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add another list
+              </button>
+              <div id="addListDetails" class="addListDetails p-3 bg-flash-white rounded-xl proactive">
+                <form class="formclass" method="post" action="/">
+                  <textarea name="list_title" id="list_title" class="list_title rounded-sm bg-transparent px-2 mb-2"
+                    placeholder="Enter list title..."></textarea>
+                  <div class="addcut">
+                    <button id="addList" class="addList rounded-[4px] bg-[#579DFF] px-3 py-1 mr-2">Add list</button>
+                    <i id="cancelList" class="fa-solid fa-xmark fa-lg cursor-pointer"></i>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/app.js"></script>
+
+  <%- include('partials/footer') %>
