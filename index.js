@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const methodOverride = require('method-override');  
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const Task = require('./models/task');
 const User = require('./models/user');
@@ -12,10 +12,12 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const flash = require('connect-flash');
 const { isLoggedIn } = require('./middleware');
+const dotenv = require("dotenv");
 
+dotenv.config();
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/taskList')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MONGO CONNECTION OPEN');
   })
@@ -50,7 +52,7 @@ passport.deserializeUser(async (id, done) => {
 })
 
 app.use((req, res, next) => {
-  
+
   res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
