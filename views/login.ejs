@@ -1,46 +1,51 @@
-<%- include('partials/header')%>
+<%- include('partials/header') %>
 
-  <div class="wrapperpro">
-    <div class="wrapper">
-      <button type="button" class="close" aria-label="Close">
+  <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 to-blue-300">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
+      <!-- <button type="button" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
         <span aria-hidden="true">&times;</span>
-      </button>
+      </button> -->
 
-      <div class="login">
-        <h2 class="sign">Log In</h2>
-        <form action="/login" method="post" class="form">
+      <div class="text-center">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Log In</h2>
+        <form action="/login" method="post" class="space-y-6">
 
-          <div class="input2">
-            <label for="username">Username or Email</label>
-            <input type="text" name="username" id="username" required>
-            <div class="line"></div>
+          <div class="relative">
+            <label for="username" class="block text-sm font-medium text-gray-600 text-start">Username or Email</label>
+            <input type="text" name="username" id="username" required
+              class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent">
           </div>
 
-          <div class="input2">
-            <label class="password" for="password">Password</label>
-            <input type="password" name="password" id="password" required minlength="8">
-            <div class="line"></div>
+          <div class="relative">
+            <label for="password" class="block text-sm font-medium text-gray-600 text-start">Password</label>
+            <input type="password" name="password" id="password" required minlength="8"
+              class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent">
           </div>
 
-          <div class="remember-forgot">
-            <label for="" class="remember-me"><input type="checkbox" name="" id="">Remember me</label>
-            <a href="#">Forgot Password?</a>
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center text-gray-600"><input type="checkbox"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"> Remember
+              me</label>
+            <a href="#" class="text-blue-600 hover:underline">Forgot Password?</a>
           </div>
 
-          <div class="submit">
-            <button class="arrow-login" type="submit">
+          <div>
+            <button type="submit"
+              class=" w-full py-2 bg-pigment-green font-semibold rounded-md hover:bg-green focus:outline-none focus:ring-2 focus:ring-green focus:ring-opacity-50">
               <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
 
         </form>
 
-        <div class="log-in">
-          <p>Need an account?</p><a href="/register" class="signup-a">Sign up</a>
+        <div class="mt-6 text-sm">
+          <p class="text-gray-600">Need an account? <a href="/register" class="text-blue-600 hover:underline">Sign
+              up</a></p>
         </div>
       </div>
     </div>
   </div>
+
   <script src="/app.js"></script>
 
-  <%- include('partials/footer')%>
+  <%- include('partials/footer') %>

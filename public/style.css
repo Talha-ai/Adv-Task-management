@@ -2,27 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
- .wrapperpro{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 98;
-}
-
-.wrapper{
-  width: 500px;
-  background-color: white;
-  border-radius: 20px;
-  height: 500px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; 
-  transition: transform .5s ease, width .2s ease;
-  margin-bottom: 3900px;
-}
-
 /*
 .wrapper{
   position: fixed;
@@ -103,138 +82,9 @@
 
 /* signup */
 
-.input{
-  display: flex;
-  flex-flow: column wrap;
-  width: 40%;
-  font-size: 0.9rem;
-  margin-left: 25px;
-  background: transparent;
-}
-
-
-.input input{
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  padding-top: 0px;
-  height: 30px;
-  padding: 5px;
-  outline: none;
-}
-
-
-.arrow-signup{
-    background-color: white;
-    font-weight: 700;
-    font-size: 50px;
-    border: 2px solid white;
-    border-radius: 5px;
-    padding: 10px 40px; 
-    margin-left: 185px;
-    margin-bottom: 0px;
-    padding: 0;
-}
-
-button:hover{
-  cursor: pointer;
-}
-
-.log-in{
-  display: flex;
-  padding-left: 90px;
-  margin-top: 0px;
-  margin-left: 50px;
-}
-
-.login-a,
-.signup-a{
-  text-decoration: none;
-  /* color: #2196f3; */
-  margin-left: 10px;
-}
-
-.login-a:hover,
-.signup-a:hover{
-  text-decoration: underline;
-}
-
-.tns{
-  margin-left: 24px;
-  margin-top: 30px;
-}
-
-.tns input{
-  margin-right: 7px;
-}
-
 
 /* Login */
 
-
-.input2 input{
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-color: #2196f3;
-  height: 30px;
-  padding: 5px;
-  padding-top: 0px; 
-  outline: none;
-  width: 90%;
-}
-  
-.input2{
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start ;
-  font-size: 0.9rem;
-  margin-left: 25px;  
-  background: transparent;
-  /* color: #2196f3; */
-}
-
-.input2 .password{
-  margin-top: 20px;
-}
-
-.arrow-login{
-  background-color: white;
-  /* color: #2196f3; */
-  font-weight: 700;
-  font-size: 50px;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 10px 40px; 
-  margin-left: 220px;
-  margin-bottom: 0px;
-  padding: 0;
-} 
-
-.remember-forgot{
-
-  margin-left: 70px;
-  padding-top: 15px;
-  }
-
-.remember-forgot input{
-  margin-right: 7px;
-}
-
-.remember-me{
-  margin-right: 65px;
-}
-
-.remember-forgot a{
-  /* color: #2196f3; */
-  text-decoration: none;
-}
-
-.remember-forgot a:hover{
-  text-decoration: underline;
-}  
 
 /* login page end */
 
